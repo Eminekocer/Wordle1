@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#773a7e">
+        android:background="#2B3654">
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="30dp"
-                android:text="Your Name : "
+                android:text="Name : "
                 android:textColor="#2f3363"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -48,7 +48,7 @@
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="#a2a4b5"
-                android:textColorHint="#a2a4b5"
+                android:textColorHint="#828282"
                 android:textSize="16sp" />
 
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="40dp"
-                android:text="Your Email : "
+                android:text="Email : "
                 android:textColor="#2f3363"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -75,7 +75,7 @@
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="#a2a4b5"
-                android:textColorHint="#a2a4b5"
+                android:textColorHint="#828282"
                 android:textSize="16sp" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="40dp"
-                android:text="Your Password : "
+                android:text="Password : "
                 android:textColor="#2f3363"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -102,8 +102,19 @@
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="#a2a4b5"
-                android:textColorHint="#a2a4b5"
+                android:textColorHint="#828282"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="299dp"
+                android:layout_height="82dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="By clicking continue,you agree to our Terms of Service and Privacy Policy"
+                android:textAlignment="center"
+                android:textSize="16dp"
+                android:textColor="#828282" />
 
         </LinearLayout>
 
@@ -144,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="Create\nAccount"
+                android:text="Create an\nAccount"
                 android:textColor="#ffffff"
                 android:textSize="33sp"
                 android:textStyle="bold"
@@ -156,14 +167,14 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button4"
+            style="@android:style/Widget.Button"
             android:layout_width="0dp"
             android:layout_height="85dp"
             android:layout_marginTop="48dp"
-            android:background="@drawable/blue_background"
-            style="@android:style/Widget.Button"
-            android:text="Register"
-            android:textSize="22sp"
+            android:background="@drawable/pink_background"
+            android:text="Continue"
             android:textColor="#ffffff"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
             app:layout_constraintStart_toStartOf="@+id/linearLayout2"

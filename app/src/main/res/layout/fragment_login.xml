@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#773A7E">
+    android:background="#2B3654">
 
     <TextView
         android:id="@+id/textView2"
@@ -31,7 +31,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="64dp"
-        android:background="@drawable/purple_background"
+        android:background="@drawable/navy_background"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24sp"
             android:layout_marginTop="16dp"
-            android:text="Your Email"
+            android:text="Email"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24sp"
             android:layout_marginTop="32dp"
-            android:text="Your Password"
+            android:text="Password"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -164,7 +164,7 @@
         style="@android:style/Widget.Button"
         android:layout_width="0dp"
         android:layout_height="85dp"
-        android:background="@drawable/blue_background"
+        android:background="@drawable/pink_background"
         android:text="Login"
         android:textColor="#ffffff"
         android:textSize="22sp"
