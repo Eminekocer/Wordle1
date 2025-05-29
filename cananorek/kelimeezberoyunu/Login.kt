@@ -48,24 +48,22 @@ val password=binding.passwordText.text.toString()
             return
         }
 auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task->
-    when{
-        task.isSuccessful->{
+
+        if (task.isSuccessful){
             toast("Giriş Başarılı")
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         }
-        task.exception is FirebaseAuthInvalidUserException->{
-            toast("Kullanıcı bulunamadı, kayıt ekranına yönlendiriliyorsunuz")
-            startActivity(Intent(this,Register::class.java).apply{
-                putExtra("email",email)
-            })
-        }
-        else -> toast("Hata: ${task.exception?.localizedMessage}")
+    else {
+        toast("Hata: ${task.exception?.localizedMessage}")
     }
 }
     }
     private fun toast(mesaj: String){
         Toast.makeText(this,mesaj,Toast.LENGTH_SHORT).show()
+    }
+    fun KayitOl(view: View){
+        startActivity(Intent(this, Register::class.java))
     }
 
     fun SifremiUnuttum(view: View){
