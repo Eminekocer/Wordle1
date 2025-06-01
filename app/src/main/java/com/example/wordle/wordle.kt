@@ -12,9 +12,9 @@ import com.mertatmaca.worldeapp.databinding.WordleBinding
 class wordle : AppCompatActivity() {
 
     private lateinit var binding: WordleBinding
-    private var correctWord = ""
+    private lateinit var correctWord: Word
     private var currentRow = 0
-    private val maxAttempts = 5
+    private val maxAttempts = 6
     private val boxRefs = mutableListOf<MutableList<TextView>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class wordle : AppCompatActivity() {
             val input = binding.guessInput.text.toString().lowercase()
             if (input.length != 5) {
                 Toast.makeText(this, "5 harfli bir kelime girin", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+                return@setOnClickListener //alttaki kodlara geçilmemesini sağlıyor
             }
             if (currentRow >= maxAttempts) return@setOnClickListener
 
@@ -36,7 +36,7 @@ class wordle : AppCompatActivity() {
                 val box = boxRefs[currentRow][i]
                 box.text = input[i].uppercase()
                 box.animate()
-                    .setStartDelay(i * 200L) // her kutu 200ms gecikmeli başlar
+                    .setStartDelay(i * 200L) // 200ms gecikme sağlıyor
                     .scaleX(1.2f)
                     .scaleY(1.2f)
                     .rotationX(360f)
@@ -55,7 +55,7 @@ class wordle : AppCompatActivity() {
             currentRow++
             binding.guessInput.text.clear()
 
-            if (input == correctWord) {
+            if (input == correctWord.english) {
                 Toast.makeText(this, "Tebrikler! Kelime doğru.", Toast.LENGTH_LONG).show()
                 binding.submitGuess.isEnabled = false
                 showRestartPrompt()
@@ -87,6 +87,8 @@ class wordle : AppCompatActivity() {
     }
 
     private fun setupEmptyGrid() {
+        binding.gridLayout.rowCount = maxAttempts
+
         for (row in 0 until maxAttempts) {
             val rowBoxes = mutableListOf<TextView>()
             for (col in 0 until 5) {
@@ -115,9 +117,9 @@ class wordle : AppCompatActivity() {
 
     private fun getColorForLetter(letter: Char, index: Int): String {
         return when {
-            letter == correctWord[index] -> "#00AA00" // green
-            letter in correctWord -> "#CCCC00" // yellow
-            else -> "#808080" // black
+            letter == correctWord.english[index] -> "#00AA00"
+            letter in correctWord.english -> "#CCCC00" 
+            else -> "#808080" 
         }
     }
 
@@ -125,3 +127,10 @@ class wordle : AppCompatActivity() {
         return (dp * resources.displayMetrics.density).toInt()
     }
 }
+
+
+data class Word(
+    val id: Int,
+    val english: String,
+    val turkish: String
+)
