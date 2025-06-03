@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/home_bg_color"
-    tools:context=".homePage">
+    tools:context=".HomePage">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,22 +19,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="24dp"
                 android:src="@drawable/female_profile" />
 
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="14dp"
                 android:text="Hi,"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -42,16 +43,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
-            android:layout_weight="0.333"
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/createQuiz"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="140dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
@@ -77,8 +78,9 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/addWord"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="140dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/navy1_background"
@@ -105,8 +107,9 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/analysisReport"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="140dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
@@ -125,7 +128,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="Analysis Report"
                     android:textAlignment="center"
                     android:textColor="@color/white"
@@ -136,17 +139,84 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="24dp"
+                android:layout_weight="0.333"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/wordle"
+                    android:layout_width="115dp"
+                    android:layout_height="140dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/navy1_background"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView13"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/wordle_icon" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Wordle"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="19sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/learnWords"
+                    android:layout_width="115dp"
+                    android:layout_height="140dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/navy1_background"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView14"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/learn_icon" />
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Learn Words"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="19sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="24dp"
-            android:layout_weight="0.333"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:text="Categories"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -156,11 +226,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
-            android:layout_weight="0.333"
+
             android:orientation="horizontal">
 
             <LinearLayout
@@ -243,6 +313,7 @@
                 android:layout_height="55dp"
                 android:orientation="horizontal">
 
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -308,9 +379,9 @@
         <LinearLayout
             android:layout_width="150dp"
             android:layout_height="48dp"
-            android:layout_marginStart="230dp"
-            android:layout_marginTop="260dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="240dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/navy_background"
             android:orientation="horizontal">
 
@@ -322,25 +393,20 @@
                 android:src="@drawable/settings_icon" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button6"
+                android:id="@+id/settingsButton"
                 android:layout_width="40dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="0.3"
                 android:background="@drawable/navy1_background"
-                android:textColor="@color/white"
+                android:text="settings"
                 android:textAllCaps="false"
-                android:text="settings" />
-
-
+                android:textColor="@color/white" />
 
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"></LinearLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

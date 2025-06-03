@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "774081095312",
+    "project_id": "kelimeezberoyunu",
+    "storage_bucket": "kelimeezberoyunu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774081095312:android:ebd2fe8325b085d36b5a15",
+        "android_client_info": {
+          "package_name": "com.cananorek.kelimeezberoyunu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-a4z09S9tYVM6gZH0ClcpFEUYY1I_sr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774081095312:android:0bb72a5c11d2d6d86b5a15",
+        "android_client_info": {
+          "package_name": "com.example.wordle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-a4z09S9tYVM6gZH0ClcpFEUYY1I_sr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

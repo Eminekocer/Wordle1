@@ -1,14 +1,129 @@
 package com.example.wordle
 
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.wordle.domain.QuestionModel
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+fun questionList():MutableList<QuestionModel> {
+ val question:MutableList<QuestionModel> = mutableListOf()
+  question.add(
+      QuestionModel(
+          1,
+          "Whats the meaning of solar system?",
+          "Dünya",
+          "Güneş",
+          "Neptün",
+          "Güneş Sistemi",
+          "d",
+          5,
+          null
+      ) )
+    question.add(
+        QuestionModel(
+            2,
+            "Whats the meaning of solar system?",
+            "Dünya",
+            "Güneş",
+            "Neptün",
+            "Güneş Sistemi",
+            "d",
+            5,
+            null
+        ) )
+    question.add(
+        QuestionModel(
+            3,
+            "Whats the meaning of solar system?",
+            "Dünya",
+            "Güneş",
+            "Neptün",
+            "Güneş Sistemi",
+            "d",
+            5,
+            null
+        ) )
+    question.add(
+        QuestionModel(
+            4,
+            "Whats the meaning of solar system?",
+            "Dünya",
+            "Güneş",
+            "Neptün",
+            "Güneş Sistemi",
+            "d",
+            5,
+            null
+        ) )
+    question.add(
+        QuestionModel(
+            5,
+            "Whats the meaning of solar system?",
+            "Dünya",
+            "Güneş",
+            "Neptün",
+            "Güneş Sistemi",
+            "d",
+            5,
+            null
+        ) )
+    question.add(
+        QuestionModel(
+            6,
+            "Whats the meaning of solar system?",
+            "Dünya",
+            "Güneş",
+            "Neptün",
+            "Güneş Sistemi",
+            "d",
+            5,
+            null
+        ) )
+    question.add(
+        QuestionModel(
+            7,
+            "Whats the meaning of solar system?",
+            "Dünya",
+            "Güneş",
+            "Neptün",
+            "Güneş Sistemi",
+            "d",
+            5,
+            null
+        ) )
+    question.add(
+        QuestionModel(
+            8,
+            "Whats the meaning of solar system?",
+            "Dünya",
+            "Güneş",
+            "Neptün",
+            "Güneş Sistemi",
+            "d",
+            5,
+            null
+        ) )
+    question.add(
+        QuestionModel(
+            9,
+            "Whats the meaning of solar system?",
+            "Dünya",
+            "Güneş",
+            "Neptün",
+            "Güneş Sistemi",
+            "d",
+            5,
+            null
+        ) )
+    question.add(
+        QuestionModel(
+            10,
+            "Whats the meaning of solar system?",
+            "Dünya",
+            "Güneş",
+            "Neptün",
+            "Güneş Sistemi",
+            "d",
+            5,
+            null
+        )
+    )
+return question
 }

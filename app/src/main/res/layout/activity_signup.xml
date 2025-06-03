@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignupFragment">
+    tools:context=".SignupActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#2B3654">
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#2B3654"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="400dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
@@ -56,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:text="Email : "
                 android:textColor="#2f3363"
                 android:textSize="18sp"
@@ -83,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:text="Password : "
                 android:textColor="#2f3363"
                 android:textSize="18sp"
@@ -113,8 +118,8 @@
                 android:layout_marginTop="24dp"
                 android:text="By clicking continue,you agree to our Terms of Service and Privacy Policy"
                 android:textAlignment="center"
-                android:textSize="16dp"
-                android:textColor="#828282" />
+                android:textColor="#828282"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -123,6 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -166,12 +172,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button4"
+            android:id="@+id/registerButton"
             style="@android:style/Widget.Button"
             android:layout_width="0dp"
-            android:layout_height="85dp"
+            android:layout_height="55dp"
             android:layout_marginTop="48dp"
             android:background="@drawable/pink_background"
+            android:onClick="continueButton"
             android:text="Continue"
             android:textColor="#ffffff"
             android:textSize="22sp"
@@ -181,4 +188,4 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
