@@ -26,12 +26,12 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="100dp"
+        android:layout_width="379dp"
+        android:layout_height="669dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="3dp"
         android:background="@drawable/navy_background"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -158,20 +158,32 @@
                 app:srcCompat="@drawable/twitter" />
         </LinearLayout>
 
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login1Button"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/pink_background"
+            android:onClick="login1Button"
+            android:text="Login"
+            android:textColor="#ffffff"
+            android:textSize="22sp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/login1Button"
-        style="@android:style/Widget.Button"
-        android:onClick="login1Button"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:background="@drawable/pink_background"
-        android:text="Login"
-        android:textColor="#ffffff"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerButton"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/pink_background"
+            android:onClick="KayitOl"
+            android:text="Register"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

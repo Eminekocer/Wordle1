@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.wordle.HomePage
 import com.example.wordle.WordList
 import com.example.wordle.databinding.ActivityQuizBinding
-import com.example.wordle.Word
 
 class QuizActivity : AppCompatActivity() {
 
@@ -20,7 +19,8 @@ class QuizActivity : AppCompatActivity() {
 
     private val wordList = WordList.words
 
-    private val progressMap = mutableMapOf<Int, WordProgress>()
+    private val progressMap: MutableMap<String, WordProgress> = mutableMapOf()
+
     private val reviewIntervals = listOf(
         0L,
         1 * 24 * 60 * 60 * 1000L,
@@ -83,8 +83,8 @@ class QuizActivity : AppCompatActivity() {
 
     private fun initializeProgress() {
         wordList.forEach { word ->
-            if (!progressMap.containsKey(word.id)) {
-                progressMap[word.id] = WordProgress(word.id, 0, 0L, mutableListOf())
+            if (!progressMap.containsKey(word.createdBy)) {
+                progressMap[word.createdBy] = WordProgress(word.createdBy, 0, 0L, mutableListOf())
             }
         }
     }
@@ -99,7 +99,7 @@ class QuizActivity : AppCompatActivity() {
 
     private fun getTodaysQuizWords(): List<Word> {
         return wordList.filter { word ->
-            val progress = progressMap[word.id] ?: return@filter false
+            val progress = progressMap[word.createdBy] ?: return@filter false
             isEligibleForReview(progress)
         }
     }
@@ -115,11 +115,11 @@ class QuizActivity : AppCompatActivity() {
         }
 
         currentWord = quizWords[currentIndex]
-        binding.questionText.text = currentWord.english
+        binding.questionText.text = currentWord.engWord
         binding.questionImage.setImageResource(currentWord.imageResId)
         binding.questionText1.text = "Question ${currentIndex + 1}/$maxDailyWords"
 
-        correctAnswer = currentWord.turkish
+        correctAnswer = currentWord.turWord
 
         val options = generateOptions(correctAnswer)
         val optionButtons = listOf(
@@ -139,7 +139,7 @@ class QuizActivity : AppCompatActivity() {
     private fun checkAnswer(selected: String) {
         val isCorrect = selected == correctAnswer
 
-        val progress = progressMap[currentWord.id] ?: return
+        val progress = progressMap[currentWord.createdBy] ?: return
 
         if (isCorrect) {
             binding.feedbackText.text = "Doğru!"
@@ -172,7 +172,7 @@ class QuizActivity : AppCompatActivity() {
     private fun generateOptions(correct: String): List<String> {
         val options = mutableSetOf(correct)
         while (options.size < 4) {
-            val randomOption = wordList.random().turkish
+            val randomOption = wordList.random().turWord
             options.add(randomOption)
         }
         return options.shuffled()

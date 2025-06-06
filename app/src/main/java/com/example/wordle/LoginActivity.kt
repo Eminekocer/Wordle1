@@ -48,15 +48,16 @@ class LoginActivity : AppCompatActivity() {
             }
             else {
                 toast("Hata: ${task.exception?.localizedMessage}")
+
             }
         }
     }
     private fun toast(mesaj: String){
         Toast.makeText(this,mesaj,Toast.LENGTH_SHORT).show()
     }
-    /*fun KayitOl(view: View){
+    fun KayitOl(view: View){
         startActivity(Intent(this, Register::class.java))
-    }*/
+    }
 
     fun forgotPassword(view: View){
         startActivity(Intent(this,ForgotPassword::class.java))

@@ -14,13 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AnalystActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityAnalystBinding
-    private lateinit var tvUserName: TextView
-    private lateinit var tvScience: TextView
-    private lateinit var tvHistory: TextView
-    private lateinit var tvArt: TextView
-    private lateinit var tvSport: TextView
-    private lateinit var progressBar: ProgressBar
 
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -32,12 +27,6 @@ class AnalystActivity : AppCompatActivity() {
         setContentView(view)
 
 
-        tvUserName = findViewById(R.id.tvUserName)
-        tvScience = findViewById(R.id.tvScience)
-        tvHistory = findViewById(R.id.tvHistory)
-        tvArt = findViewById(R.id.tvArt)
-        tvSport = findViewById(R.id.tvSport)
-        progressBar = findViewById(R.id.progressBar)
 
         kullaniciVerisiniYukle()
     }
@@ -47,22 +36,27 @@ class AnalystActivity : AppCompatActivity() {
 
         firestore.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
-                val isim = doc.getString("isim") ?: "Kullanıcı"
-                val science = doc.getDouble("science") ?: 0.0
-                val history = doc.getDouble("history") ?: 0.0
-                val art = doc.getDouble("art") ?: 0.0
-                val sport = doc.getDouble("sport") ?: 0.0
-                val basari = doc.getDouble("basariYuzdesi") ?: 0.0
+                if (doc != null && doc.exists()) {
+                    val isim = doc.getString("userName") ?: "Kullanıcı"
+                    val science = doc.get("science").toString().toDoubleOrNull() ?: 0.0
+                    val history = doc.getDouble("history") .toString().toDoubleOrNull()?: 0.0
+                    val art = doc.getDouble("art") .toString().toDoubleOrNull()?: 0.0
+                    val sport = doc.getDouble("sport").toString().toDoubleOrNull() ?: 0.0
+                    val basari = doc.getDouble("basariYuzdesi") ?: 0.0
 
-                tvUserName.text = isim
-                tvScience.text = "Science: %${science.toInt()}"
-                tvHistory.text = "History: %${history.toInt()}"
-                tvArt.text = "Art: %${art.toInt()}"
-                tvSport.text = "Sport: %${sport.toInt()}"
-                progressBar.progress = basari.toInt()
+                    binding.tvUserName.text = isim
+                    binding.tvScience.text = "Science: %${science.toInt()}"
+                    binding.tvHistory.text = "History: %${history.toInt()}"
+                    binding.tvArt.text = "Art: %${art.toInt()}"
+                    binding.tvSport.text = "Sport: %${sport.toInt()}"
+                    binding.progressBar.progress = basari.toInt()
+
+                } else {
+                    Toast.makeText(this, "Kullanıcı verisi bulunamadı", Toast.LENGTH_SHORT).show()
+                }
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Veri alınamadı", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Veri alınamadı: ${it.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }
