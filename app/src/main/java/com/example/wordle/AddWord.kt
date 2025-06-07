@@ -5,15 +5,21 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wordle.databinding.ActivityAddWordBinding
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 // Veri modeli
 data class Word(
     val engWord: String = "",
     val turWord: String = "",
     val createdBy: String = "",
-    val imageResId: Int = 0
+    val imageResId: Int = 0,
+    val correctCount: Int = 0,
+    val nextReviewDate: Timestamp = Timestamp.now(),
+    val lastCorrectDate: Timestamp = Timestamp.now(),
+    val reviewHistory: List<Int> = listOf()
 )
 
 data class Sample(
@@ -44,33 +50,47 @@ class AddWord : AppCompatActivity() {
             }
 
             if (engWord.isNotEmpty() && turWord.isNotEmpty()) {
+                // Bugünün tarihi
+                val today = Timestamp.now()
+
+                // Yarının tarihi (ilk tekrar için)
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DAY_OF_YEAR, 1)
+                val nextReviewDate = Timestamp(calendar.time)
+
                 val word = Word(
                     engWord = engWord,
                     turWord = turWord,
-                    createdBy = userId
+                    createdBy = userId,
+                    correctCount = 0,
+                    nextReviewDate = nextReviewDate,
+                    lastCorrectDate = today,
+                    reviewHistory = listOf()
                 )
 
-                // "words" koleksiyonuna kelime ekle
-                db.collection("words")
+                // Firestore: Users/{userId}/words
+                db.collection("Users")
+                    .document(userId)
+                    .collection("words")
                     .add(word)
                     .addOnSuccessListener { wordRef ->
                         Log.d("Firestore", "Kelime eklendi: ${wordRef.id}")
 
-                        // Örnek cümle eklenmişse alt koleksiyona ekle
                         if (sentence.isNotEmpty()) {
                             val sample = Sample(sentence)
                             wordRef.collection("samples")
                                 .add(sample)
                                 .addOnSuccessListener {
                                     Toast.makeText(this, "Kelime ve örnek cümle eklendi!", Toast.LENGTH_SHORT).show()
-                                    clearInputFields() // Formu temizle
+                                    clearInputFields()
                                 }
                                 .addOnFailureListener { e ->
                                     Log.e("Firestore", "Örnek cümle eklenemedi", e)
+                                    Toast.makeText(this, "Kelime eklendi ama örnek cümle eklenemedi!", Toast.LENGTH_SHORT).show()
                                 }
                         } else {
                             Toast.makeText(this, "Kelime eklendi, örnek cümle boş bırakıldı.", Toast.LENGTH_SHORT).show()
-                            clearInputFields() // Formu temizle
+                            clearInputFields()
                         }
 
                     }
@@ -85,7 +105,6 @@ class AddWord : AppCompatActivity() {
         }
     }
 
-    // input alanlarını temizle
     private fun clearInputFields() {
         binding.editTextEnglish.editableText.clear()
         binding.editTextTurkish.editableText.clear()

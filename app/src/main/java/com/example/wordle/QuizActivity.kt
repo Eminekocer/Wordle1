@@ -1,24 +1,23 @@
 package com.example.wordle
 
 import android.content.Intent
-import android.os.Bundle
 import android.graphics.Color
-import android.util.Log
+import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.wordle.HomePage
-import com.example.wordle.WordList
 import com.example.wordle.databinding.ActivityQuizBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class QuizActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuizBinding
 
-    private val wordList = WordList.words
+    private val firestore = FirebaseFirestore.getInstance()
+    private val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
+    private val wordList = WordList.words
     private val progressMap: MutableMap<String, WordProgress> = mutableMapOf()
 
     private val reviewIntervals = listOf(
@@ -35,33 +34,31 @@ class QuizActivity : AppCompatActivity() {
     private var currentIndex = 0
     private lateinit var currentWord: Word
     private lateinit var correctAnswer: String
-
-    // günlük maksimum gösterilecek kelime sayısı
-    private val maxDailyWords = 10
+    private var maxDailyWords = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initializeProgress()
-        quizWords = getTodaysQuizWords().take(maxDailyWords)
-        showNextQuestion()
-        binding.outImage.setOnClickListener{
-            startActivity(Intent(this, HomePage::class.java))
+        currentUserId?.let { uid ->
+            firestore.collection("Users").document(uid).get()
+                .addOnSuccessListener { documentSnapshot ->
+                    val count = documentSnapshot.getLong("kelimeSayisi")?.toInt() ?: 10
+                    maxDailyWords = count
+                    loadProgressFromFirestore()
+                }
+                .addOnFailureListener {
+                    maxDailyWords = 10
+                    loadProgressFromFirestore()
+                }
+        } ?: run {
+            maxDailyWords = 10
+            loadProgressFromFirestore()
         }
 
-        val optionButtons = listOf(
-            binding.option1,
-            binding.option2,
-            binding.option3,
-            binding.option4
-        )
-
-        optionButtons.forEach { button ->
-            button.setOnClickListener {
-                checkAnswer(button.text.toString())
-            }
+        binding.outImage.setOnClickListener {
+            startActivity(Intent(this, HomePage::class.java))
         }
 
         binding.nextImage.setOnClickListener {
@@ -78,6 +75,26 @@ class QuizActivity : AppCompatActivity() {
                     showNextQuestion()
                 }
             }
+        }
+
+        val optionButtons = listOf(
+            binding.option1, binding.option2, binding.option3, binding.option4
+        )
+
+        optionButtons.forEach { button ->
+            button.setOnClickListener {
+                checkAnswer(button.text.toString())
+            }
+        }
+    }
+
+    private fun startQuizWithLimit() {
+        quizWords = getTodaysQuizWords().take(maxDailyWords)
+        if (quizWords.isEmpty()) {
+            Toast.makeText(this, "Bugün için tekrar edilecek kelime yok!", Toast.LENGTH_LONG).show()
+            finish()
+        } else {
+            showNextQuestion()
         }
     }
 
@@ -108,25 +125,16 @@ class QuizActivity : AppCompatActivity() {
         binding.feedbackText.text = ""
         binding.nextImage.visibility = View.GONE
 
-        if (quizWords.isEmpty()) {
-            Toast.makeText(this, "Bugün için tekrar edilecek kelime yok!", Toast.LENGTH_LONG).show()
-            finish()
-            return
-        }
-
         currentWord = quizWords[currentIndex]
+        correctAnswer = currentWord.turWord
+
         binding.questionText.text = currentWord.engWord
         binding.questionImage.setImageResource(currentWord.imageResId)
         binding.questionText1.text = "Question ${currentIndex + 1}/$maxDailyWords"
 
-        correctAnswer = currentWord.turWord
-
         val options = generateOptions(correctAnswer)
         val optionButtons = listOf(
-            binding.option1,
-            binding.option2,
-            binding.option3,
-            binding.option4
+            binding.option1, binding.option2, binding.option3, binding.option4
         )
 
         optionButtons.forEachIndexed { index, button ->
@@ -138,32 +146,34 @@ class QuizActivity : AppCompatActivity() {
 
     private fun checkAnswer(selected: String) {
         val isCorrect = selected == correctAnswer
-
         val progress = progressMap[currentWord.createdBy] ?: return
 
         if (isCorrect) {
             binding.feedbackText.text = "Doğru!"
             progress.history.add(System.currentTimeMillis())
-            if (progress.history.size > 6) progress.history.drop(progress.history.size - 6)
+            if (progress.history.size > 6) {
+                progress.history = progress.history.takeLast(6).toMutableList()
+            }
         } else {
             binding.feedbackText.text = "Yanlış! Doğru cevap: $correctAnswer"
             progress.history.clear()
         }
 
+        saveProgressToFirestore(currentWord.createdBy, progress)
+
         val optionButtons = listOf(
-            binding.option1,
-            binding.option2,
-            binding.option3,
-            binding.option4
+            binding.option1, binding.option2, binding.option3, binding.option4
         )
 
         optionButtons.forEach { button ->
             button.isEnabled = false
-            if (button.text == correctAnswer) {
-                button.setBackgroundColor(Color.GREEN)
-            } else if (button.text == selected) {
-                button.setBackgroundColor(Color.RED)
-            }
+            button.setBackgroundColor(
+                when (button.text) {
+                    correctAnswer -> Color.GREEN
+                    selected -> Color.RED
+                    else -> Color.LTGRAY
+                }
+            )
         }
 
         binding.nextImage.visibility = View.VISIBLE
@@ -176,5 +186,40 @@ class QuizActivity : AppCompatActivity() {
             options.add(randomOption)
         }
         return options.shuffled()
+    }
+
+    private fun loadProgressFromFirestore() {
+        if (currentUserId == null) {
+            initializeProgress()
+            startQuizWithLimit()
+            return
+        }
+
+        firestore.collection("Users")
+            .document(currentUserId)
+            .collection("WordProgress")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val progress = document.toObject(WordProgress::class.java)
+                    progressMap[progress.wordId] = progress
+                }
+                initializeProgress()
+                startQuizWithLimit()
+            }
+            .addOnFailureListener {
+                initializeProgress()
+                startQuizWithLimit()
+            }
+    }
+
+    private fun saveProgressToFirestore(wordId: String, progress: WordProgress) {
+        if (currentUserId == null) return
+
+        firestore.collection("Users")
+            .document(currentUserId)
+            .collection("WordProgress")
+            .document(wordId)
+            .set(progress)
     }
 }

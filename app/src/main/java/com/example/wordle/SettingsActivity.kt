@@ -48,7 +48,7 @@ class SettingsActivity : AppCompatActivity() {
     }
     private fun veriyiYukle(){
         val uid= auth.currentUser?.uid?: return
-        firestore.collection("users").document(uid).get()
+        firestore.collection("Users").document(uid).get()
             .addOnSuccessListener { doc ->
                 val girilenSayi= doc.getLong("kelimeSayisi")?.toInt()
                 if(girilenSayi!= null){

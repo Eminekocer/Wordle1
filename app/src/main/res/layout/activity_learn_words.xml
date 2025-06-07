@@ -7,4 +7,17 @@
     android:fitsSystemWindows="true"
     tools:context=".LearnWords">
 
+    <!-- txtWordList adlı TextView -->
+    <TextView
+        android:id="@+id/txtWordList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Kelimeler burada gösterilecek"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
