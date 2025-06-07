@@ -57,18 +57,8 @@ class LearnWords : AppCompatActivity() {
                         }
 
                         // Burada kelimeleri gösterme işlemleri yapılır
-                        setupWordList(wordList)
                     }
             }
-
-        }
-
-        private fun setupWordList(wordList: List<Word>) {
-            val stringBuilder = StringBuilder()
-            for (word in wordList) {
-                stringBuilder.append("📘 ${word.engWord} - 🇹🇷 ${word.turWord}\n")
-            }
-            binding.txtWordList.text = stringBuilder.toString()
 
         }
     }
