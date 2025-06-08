@@ -10,22 +10,21 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class Register : AppCompatActivity() {
-
-    private lateinit var auth: FirebaseAuth
+  private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_signup)
 
         // Firebase başlat
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        val emailEditText = findViewById<EditText>(R.id.editTextEmail)
-        val passwordEditText = findViewById<EditText>(R.id.editTextPassword)
-        val usernameEditText = findViewById<EditText>(R.id.editTextUsername)
-        val registerButton = findViewById<Button>(R.id.buttonRegister)
+        val emailEditText = findViewById<EditText>(R.id.signupEmail)
+        val passwordEditText = findViewById<EditText>(R.id.signupPassword)
+        val usernameEditText = findViewById<EditText>(R.id.signupName)
+        val registerButton = findViewById<Button>(R.id.continueButton)
 
         registerButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
@@ -70,3 +69,6 @@ class Register : AppCompatActivity() {
         }
     }
 }
+
+
+   
