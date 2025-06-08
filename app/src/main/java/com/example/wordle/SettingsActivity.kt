@@ -35,7 +35,7 @@ class SettingsActivity : AppCompatActivity() {
         wordNumber=findViewById(R.id.wordNumber)
         val registerButton= findViewById<Button>(R.id.registerButton)
 
-        //Firebaseden ve localden veriyi getir
+       
         veriyiYukle()
         registerButton.setOnClickListener {
             val girilenSayi= wordNumber.text.toString().toIntOrNull()
