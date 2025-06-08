@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+ <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -39,9 +39,12 @@
             <EditText
                 android:id="@+id/editTextEnglish"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:hint="ENTER THE WORD YOU WANT TO ADD"
+                android:background="@drawable/edittext_background_grey"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -56,10 +59,12 @@
             <EditText
                 android:id="@+id/editTextTurkish"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="10dp"
-                android:hint="ENTER THE MEANING OF THE WORD YOU WILL ADD"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:hint="ENTER THE MEANING"
+                android:background="@drawable/edittext_background_grey"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -67,10 +72,15 @@
             <EditText
                 android:id="@+id/editTextSample"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:hint="Sample Sentence"
-                android:textSize="25sp" />
+                android:hint="SIMPLE SENTENCES"
+                android:background="@drawable/edittext_background_grey"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -79,9 +89,9 @@
             android:id="@+id/btnAddWord"
             android:layout_width="match_parent"
             android:layout_height="62dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/pink_background"
             android:text="Add Word"
             android:textColor="@color/white" />
