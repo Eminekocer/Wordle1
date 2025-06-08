@@ -22,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //Firebase Authentication başlat,
         auth= FirebaseAuth.getInstance()
         binding.forgotPassword.setOnClickListener{
            forgotPassword(view)
