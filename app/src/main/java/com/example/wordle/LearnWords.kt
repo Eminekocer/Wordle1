@@ -15,8 +15,9 @@ import com.google.firebase.firestore.DocumentSnapshot
 class LearnWords : AppCompatActivity() {
 
         private var maxDailyWords: Int = 10
-
         private lateinit var binding: ActivityLearnWordsBinding
+        private val wordList = mutableListOf<Word>()
+        private var currentIndex = 0
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             binding = ActivityLearnWordsBinding.inflate(layoutInflater)
@@ -42,6 +43,10 @@ class LearnWords : AppCompatActivity() {
                 maxDailyWords = 10
                 startLearningWithLimit()
             }
+             binding.learned.setOnClickListener{
+             currentIndex++
+                showCurrentWord()
+            }
         }
 
         private fun startLearningWithLimit() {
@@ -63,4 +68,14 @@ class LearnWords : AppCompatActivity() {
             }
 
         }
+        private fun showCurrentWord() {
+        if (currentIndex < wordList.size) {
+            val currentWord = wordList[currentIndex]
+            binding.textView11.text = currentWord.engWord
+            binding.TurWordName.text = currentWord.turWord
+        } else {
+            binding.textView11.text = "Tebrikler! Tüm kelimeleri öğrendiniz."
+            binding.TurWordName.text = ""
+        }
+    }
     }
