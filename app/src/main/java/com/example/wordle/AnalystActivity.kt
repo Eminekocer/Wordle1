@@ -1,12 +1,7 @@
 package com.example.wordle
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wordle.databinding.ActivityAnalystBinding
@@ -26,9 +21,18 @@ class AnalystActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        // QuizActivity'den gelen doğru ve yanlış cevap sayılarını al
+        // Eğer bu veriler gelmezse (örneğin doğrudan bu aktiviteye gelinirse), varsayılan olarak 0 kullanılır.
+        val correctAnswers = intent.getIntExtra("CORRECT_ANSWERS", 0)
+        val incorrectAnswers = intent.getIntExtra("INCORRECT_ANSWERS", 0)
 
+        // Bu verileri UI'da göster
+        // Not: Bu TextView'ların (tvCorrectAnswers ve tvIncorrectAnswers)
+        // activity_analyst.xml dosyanızda tanımlı olması gerekmektedir.
+        binding.tvCorrectAnswers.text = "Bu Oturumda Doğru Cevaplar: $correctAnswers"
+        binding.tvIncorrectAnswers.text = "Bu Oturumda Yanlış Cevaplar: $incorrectAnswers"
 
-        kullaniciVerisiniYukle()
+        kullaniciVerisiniYukle() // Diğer kullanıcı verilerini yükleme fonksiyonu
     }
 
     private fun kullaniciVerisiniYukle() {
@@ -49,7 +53,7 @@ class AnalystActivity : AppCompatActivity() {
                     binding.tvHistory.text = "History: %${history.toInt()}"
                     binding.tvArt.text = "Art: %${art.toInt()}"
                     binding.tvSport.text = "Sport: %${sport.toInt()}"
-                    binding.progressBar.progress = basari.toInt()
+
 
                 } else {
                     Toast.makeText(this, "Kullanıcı verisi bulunamadı", Toast.LENGTH_SHORT).show()
