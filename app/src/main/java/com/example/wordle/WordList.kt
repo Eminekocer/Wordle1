@@ -11,6 +11,26 @@ object WordList {
         Word("7", "light", "ışık",R.drawable.isik),
         Word("8", "bread", "ekmek",R.drawable.ekmek),
         Word("9", "table", "masa",R.drawable.masa),
-        Word("10", "flame", "alev",R.drawable.alev)
-    )
+        Word("10", "flame", "alev",R.drawable.alev),
+        Word("11","horse","at",R.drawable.at),
+        Word("12","scarf","atkı",R.drawable.atkı),
+        Word("13","shoe","ayakkabı",R.drawable.ayakkabı),
+        Word("14","mirror","ayna",R.drawable.ayna),
+        Word("15","computer","bilgisayar",R.drawable.at),
+        Word("16","bird","kuş",R.drawable.bird),
+        Word("17","bicycle","bisiklet",R.drawable.bisiklet),
+        Word("18","refrigerator","buzdolabı",R.drawable.buzdolabı),
+        Word("19","ice cream","dondurma",R.drawable.dondurma),
+        Word("20","hand","el",R.drawable.el),
+        Word("21","watermelon","karpuz",R.drawable.karpuz),
+        Word("22","earring","küpe",R.drawable.küpe),
+        Word("23","library","kütüphane",R.drawable.kütüphane),
+        Word("24","car tire","araba lastiği",R.drawable.lastik),
+        Word("25","mouse","fare",R.drawable.faree),
+        Word("26","toys","oyuncak",R.drawable.oyuncak),
+        Word("27","jam","reçel",R.drawable.reçel),
+        Word("28","path","yol",R.drawable.yol),
+        Word("29","bell","zil",R.drawable.zil),
+        Word("30","umbrella","şemsiye",R.drawable.şemsiye),
+        )
 }

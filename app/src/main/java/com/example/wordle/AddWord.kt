@@ -12,9 +12,9 @@ import java.util.*
 
 // Veri modeli
 data class Word(
+    val createdBy: String = "",
     val engWord: String = "",
     val turWord: String = "",
-    val createdBy: String = "",
     val imageResId: Int = 0,
     val correctCount: Int = 0,
     val nextReviewDate: Timestamp = Timestamp.now(),
@@ -37,6 +37,10 @@ class AddWord : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         val db = FirebaseFirestore.getInstance()
+
+        binding.imageView10.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         binding.btnAddWord.setOnClickListener {
             val engWord = binding.editTextEnglish.text.toString().trim()

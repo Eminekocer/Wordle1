@@ -31,10 +31,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignupActivity" />
+
         <activity android:name=".HomePage" />
         <activity android:name=".Wordle" />
         <activity android:name=".AddWord" />
+        <activity android:name=".LearnWords" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".AnalystActivity" />
         <activity android:name=".QuizActivity" />

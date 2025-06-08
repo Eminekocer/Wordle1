@@ -14,7 +14,6 @@ import com.google.firebase.firestore.DocumentSnapshot
 
 class LearnWords : AppCompatActivity() {
 
-    class LearnWords : AppCompatActivity() {
         private var maxDailyWords: Int = 10
 
         private lateinit var binding: ActivityLearnWordsBinding
@@ -24,6 +23,9 @@ class LearnWords : AppCompatActivity() {
             val view = binding.root
             setContentView(view)
             val uid = FirebaseAuth.getInstance().currentUser?.uid
+            binding.imageView10.setOnClickListener {
+                onBackPressedDispatcher.onBackPressed()
+            }
 
             if (uid != null) {
                 FirebaseFirestore.getInstance().collection("Users").document(uid).get()
@@ -62,4 +64,3 @@ class LearnWords : AppCompatActivity() {
 
         }
     }
-}
