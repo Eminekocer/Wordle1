@@ -35,7 +35,7 @@ class SettingsActivity : AppCompatActivity() {
         wordNumber=findViewById(R.id.wordNumber)
         val registerButton= findViewById<Button>(R.id.registerButton)
 
-       
+        //Firebaseden ve localden veriyi getir
         veriyiYukle()
         registerButton.setOnClickListener {
             val girilenSayi= wordNumber.text.toString().toIntOrNull()
@@ -62,7 +62,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun kaydet(girilenSayi: Int) {
         val uid = auth.currentUser?.uid ?: return
         val veri = mapOf("kelimeSayisi" to girilenSayi)
-        firestore.collection("users").document(uid)
+        firestore.collection("Users").document(uid)
             .set(veri,SetOptions.merge())
             .addOnSuccessListener {
                 Toast.makeText(this, "Veriler kaydedildi", Toast.LENGTH_SHORT).show()
